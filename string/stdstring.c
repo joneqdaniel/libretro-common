@@ -23,6 +23,7 @@
 #include <stdint.h>
 #include <ctype.h>
 #include <string.h>
+#include <stdio.h>
 
 #include <compat/strl.h>
 #include <string/stdstring.h>
@@ -518,7 +519,8 @@ void string_remove_all_chars(char *s, char c)
 {
    char *read_ptr  = s;
    char *write_ptr = s;
-
+   if(s != NULL)
+   {
    while (*read_ptr != '\0')
    {
       /* Only write if the character is not the one to remove */
@@ -528,6 +530,7 @@ void string_remove_all_chars(char *s, char c)
    }
 
    *write_ptr = '\0';
+   }
 }
 
 /**
@@ -542,6 +545,7 @@ void string_remove_all_chars(char *s, char c)
 void string_replace_all_chars(char *s, char find, char replace)
 {
    char *str_ptr = s;
+   if( s != NULL)
    while ((str_ptr = strchr(str_ptr, find)))
       *str_ptr++ = replace;
 }

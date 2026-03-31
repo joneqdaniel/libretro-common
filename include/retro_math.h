@@ -127,10 +127,16 @@ static INLINE float saturate_value(float v)
  *
  * Returns: dot product value (derived from @a and @b).
  **/
-static INLINE float dot_product(const float* a, const float* b)
-{
-   return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
-}
+#define dot(a,b,n,i) \
+({ \
+   typeof((a)[0] * (b)[0]) dst = i; \
+   _Pragma("omp simd reduction(+:dst)"); \
+   for(size_t j = 0; j < MIN(MIN(countof(a),countof(b)),n); j++) \
+      (dst) += (a)[j] * (b)[j]; \
+   (dst); \
+})
+
+#define dot_product(a,b) dot(a,b,3,0)
 
 /**
  * convert_rgb_to_yxy:

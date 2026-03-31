@@ -4,3 +4,5 @@ glsm/
 *.so
 *.dylib
 *.exe
+test/hash/*.gcda
+test/hash/*.gcno

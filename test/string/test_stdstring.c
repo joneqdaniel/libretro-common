@@ -138,7 +138,10 @@ END_TEST
 
 START_TEST (test_string_replacesubstr)
 {
-   char *res = string_replace_substring("foobaarhellowooorldtest", "oo", "ooo");
+   const char *foobar = "foobaarhellowooorldtest";
+   const char *oo = "oo";
+   const char *ooo = "ooo";
+   char *res = string_replace_substring(foobar,strlen(foobar),oo,strlen(oo),ooo,strlen(ooo));
    ck_assert(res != NULL);
    ck_assert(!strcmp(res, "fooobaarhellowoooorldtest"));
    free(res);
